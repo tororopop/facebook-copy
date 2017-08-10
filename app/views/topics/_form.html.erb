@@ -1,0 +1,29 @@
+<%= form_for(@topic, url: choose_new_or_edit) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @topic.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @topic.file? %>
+    <%= image_tag(@topic.file_url, :width => "400") %>
+  <% end %>
+  <br>
+  <%= f.label :キャプション %>
+  <%= f.text_field :caption, class: 'form-control' %>
+  <br>
+  <%= f.label :写真 %>
+  <%= f.file_field :file, class: 'form-control' %>
+  <%= f.hidden_field :file_cache %>
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
+<div style="text-align:center;">
+<%= link_to "一覧画面にもどる", topics_path %>
+</div>
