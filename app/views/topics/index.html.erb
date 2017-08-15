@@ -1,20 +1,44 @@
-<% @topics.reverse_each do |topic| %>
-  <div style="text-align:left; background-color:#fff; border:#DCDCDC 1px solid;border-radius: 4px;padding-left: 15px;padding-right: 15px;">
-    <div class="row"><%= profile_img_thumb(topic.user) if profile_img_thumb(topic.user) %><%= topic.user.name %></div>
-    <div class="row"><%= image_tag(topic.file_url, :width => "800") %></div>
-    <div class="row"><%= image_tag("heart.png", :width => "20") %>
-      <%= image_tag("comment.png", :width => "20") %>
-      <%= image_tag("airplane.png", :width => "20") %></div>
-    <div class="row"><%= topic.user.name %> <%= topic.caption %></div>
-    <div class="row" style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
 
-    <div style="text-align:right;">
-      <div class="row btn-group"  role="group">
-        <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
-        <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+    <%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
+
+
+    <% @topics.reverse_each do |topic| %>
+    <div class="row" style="background-color:#fafafa;">
+
+      <% if current_user.id === topic.user_id %>
+      <div style="text-align: right;">
+        <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm' %>
+        <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
       </div>
+      <% end %>
+
+        <%= link_to user_path(topic.user) do %>
+          <%= profile_img_thumb(topic.user) if profile_img_thumb(topic.user) %>
+        <%= topic.user.name %>
+        <% end %>
+
+        <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
+
+
+        <div style="font-size: 200%;"><%= topic.caption %></div>
+
+        <% if topic.file? %>
+        <%= image_tag(topic.file_url, :width => "400") %>
+        <% end %>
+
+        <div></div>
+
+        <span>いいね！</span>
+
+        <span><%= link_to topic_path(topic) do %>
+          コメントする
+        <% end %></span>
+
+        <br>
+        <br>
     </div>
-  </div>
-  <br>
-  <br>
-<% end %>
+
+    <br>
+    <br>
+
+    <% end %>

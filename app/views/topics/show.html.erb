@@ -1,0 +1,33 @@
+
+<div class="row" style="background-color:#fafafa;">
+
+  <% if current_user.id === @topic.user_id %>
+  <div style="text-align: right;">
+    <%= link_to "編集", edit_topic_path(@topic.id), class: 'btn btn-default btn-sm' %>
+    <%= link_to "削除", topic_path(@topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
+  </div>
+  <% end %>
+
+
+  <%= link_to users_path(@topic.user) do %>
+    <%= profile_img_thumb(@topic.user) if profile_img_thumb(@topic.user) %>
+  <%= @topic.user.name %>
+  <% end %>
+
+  <div style="border-bottom:#DCDCDC 1px solid;"><%= @topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[@topic.updated_at.wday]}) %k:%M") %></div>
+
+
+  <div style="font-size: 200%;"><%= @topic.caption %></div>
+
+  <%= image_tag(@topic.file_url, :width => "400") %>
+
+
+    <p>コメント一覧</p>
+    <div id="comments_area">
+      <%= render partial: 'comments/index', locals: { comments: @comments, topic: @topic } %>
+    </div>
+    <%= render partial: 'comments/form', locals: { comment: @comment, topic: @topic } %>
+    <div style="text-align:center;">
+    <%= link_to "一覧画面にもどる", topics_path %>
+    </div>
+</div>

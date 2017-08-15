@@ -15,15 +15,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    format.html{ render :edit }
   end
 
   def update
     respond_to do |format|
-    if @comment.update(comment_params)
-      redirect_to topic_path, notice: "コメントを編集しました。"
-    else
-      format.html{ render :edit }
+      if @comment.update(comment_params)
+        format.html { redirect_to topic_path(@topic), notice: "コメントを編集しました。" }
+      else
+        format.html { render :edit }
+      end
     end
   end
 
@@ -36,11 +36,11 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:topic_id, :caption)
+      params.require(:comment).permit(:topic_id, :content)
     end
 
     def set_comment
-      @topic = Topic.find(params[:id])
+      @topic = Topic.find(params[:topic_id])
       @comment = @topic.comments.find(params[:id])
     end
 end

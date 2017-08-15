@@ -6,9 +6,66 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="background-color:#EEEEEE;">
+
+    <% if user_signed_in? %>
+      <section id="menu-wrap" class="function container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                  <%= link_to user_path(current_user) do %>
+                  <%= profile_img_thumb(current_user) if profile_img_thumb(current_user) %>
+                  <%= current_user.name %>
+                  <% end %>
+            </div>
+
+            <div class="col-xs-2">
+                    <a href="/">ホーム</a>
+            </div>
+            <div class="col-xs-2">
+              <%= link_to 'マイページ', edit_user_registration_path(current_user) %>
+            </div>
+            <div class="col-xs-2">
+              <%= link_to 'ユーザー一覧', users_path %>
+            </div>
+            <div class="col-xs-2">
+              <%= link_to 'メッセージ', conversations_path %>
+            </div>
+            <div class="col-xs-2">
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            </div>
+        </div>
+      </section>
+
+
+
+
+    <% else %>
+      <section id="menu-wrap" style="font-size: 10px;">
+        FACEBOOK-COPY
+
+        <%= link_to 'ログイン', new_user_session_path %>
+
+      </section>
+    <% end %>
+  </header>
+
+
+  <div class="container">
+    <p class="flash" style="text-align: center;"><%= notice %><%= alert %></p>
+
+    <div class="wrapper col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 <%= yield %>
+
+    </div>
+  </div>
+    <br>
+    <br>
+  <footer>
+    <ul>
+      <li><a>@ 2017 dive into code</a></li>
+    </ul>
+  </footer>
 
 </body>
 </html>

@@ -12,7 +12,8 @@ Rails.application.routes.draw do
 
   root 'topics#index'
 
-  resources :users, only: [:index]
+  resources :users, only: [:index, :show]
+
   resources :relationships, only: [:create, :destroy]
 
   resources :conversations do

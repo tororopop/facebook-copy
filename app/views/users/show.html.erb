@@ -1,0 +1,60 @@
+<p>test(user/show画面です。)</p>
+
+<%= profile_img_thumb(@user) %>
+<br>
+<%= @user.email %>
+
+<% if @user.id != current_user.id %>
+<%= render partial: 'follow_form', locals: { user: @user } %>
+<% end %>
+<br>
+  <%= render partial: 'users/followed_users', locals: { user: @user } %>
+<br>
+<br>
+  <%= render partial: 'users/followers', locals: { user: @user } %>
+  <br>
+  <br>
+
+
+  <% @topics.reverse_each do |topic| %>
+  <div class="row" style="background-color:#fafafa;">
+
+    <% if @user.id === topic.user_id %>
+
+        <% if current_user.id === topic.user_id %>
+        <div style="text-align: right;">
+          <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm' %>
+          <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
+        </div>
+        <% end %>
+
+        <%= profile_img_thumb(topic.user) if profile_img_thumb(topic.user) %>
+      <%= topic.user.name %>
+
+      <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
+
+
+      <div style="font-size: 200%;"><%= topic.caption %></div>
+
+      <% if topic.file? %>
+      <%= image_tag(topic.file_url, :width => "400") %>
+      <% end %>
+
+      <div></div>
+
+      <span>いいね！</span>
+
+      <span><%= link_to topic_path(topic) do %>
+        コメントする
+      <% end %></span>
+
+      <br>
+      <br>
+
+      <% end %>
+
+  </div>
+
+  <br>
+
+  <% end %>
