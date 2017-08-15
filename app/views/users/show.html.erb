@@ -16,10 +16,10 @@
   <br>
 
 
-  <% @topics.reverse_each do |topic| %>
+  <% @usertopics.reverse_each do |topic| %>
   <div class="row" style="background-color:#fafafa;">
 
-    <% if @user.id === topic.user_id %>
+    <!-- <% if @user.id === topic.user_id %> -->
 
         <% if current_user.id === topic.user_id %>
         <div style="text-align: right;">
@@ -51,7 +51,7 @@
       <br>
       <br>
 
-      <% end %>
+      <!-- <% end %> -->
 
   </div>
 

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @topics = Topic.all
+    @usertopics = @user.topics
   end
 
 end
