@@ -3,7 +3,7 @@
   <% @users.each do |user| %>
       <div class="container-child col-md-2 col-sm-4 col-xs-6 ">
         <%= link_to user_path(user) do %>
-        <%= profile_img(user) %>
+        <%= profile_img_users(user) %>
         <%= user.email %>
         <% end %>
         <% if user.id != current_user.id %>

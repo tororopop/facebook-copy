@@ -2,7 +2,7 @@
     <%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
 
 
-    <% @topics.reverse_each do |topic| %>
+    <% @topics.each do |topic| %>
     <div class="row" style="background-color:#fafafa;">
 
       <% if current_user.id === topic.user_id %>
@@ -13,7 +13,7 @@
       <% end %>
 
         <%= link_to user_path(topic.user) do %>
-          <%= profile_img_thumb(topic.user) if profile_img_thumb(topic.user) %>
+        <%= profile_img_topics(topic.user) if profile_img_topics(topic.user) %>
         <%= topic.user.name %>
         <% end %>
 
@@ -28,7 +28,7 @@
 
         <div></div>
 
-        <span>いいね！</span>
+        <span><%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %></span>
 
         <span><%= link_to topic_path(topic) do %>
           コメントする

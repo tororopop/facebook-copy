@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :comments
+    resources :likes, only: [:create, :destroy]
   end
 
   root 'topics#index'

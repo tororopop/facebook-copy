@@ -1,0 +1,3 @@
+$("#like-button<%= @topic.id%>").html("<%= j(render partial: 'like', locals: { topic: @topic, likes: @likes }) %>");
+// $("#like-buttons").html("<%= j(render partial: 'like', locals: { topic: @topic, likes: @likes }) %>");
+<%# binding.pry %>

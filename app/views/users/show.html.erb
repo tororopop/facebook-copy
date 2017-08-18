@@ -1,6 +1,6 @@
 <p>test(user/show画面です。)</p>
 
-<%= profile_img_thumb(@user) %>
+<%= profile_img_users(@user) %>
 <br>
 <%= @user.email %>
 
@@ -28,7 +28,7 @@
         </div>
         <% end %>
 
-        <%= profile_img_thumb(topic.user) if profile_img_thumb(topic.user) %>
+        <%= profile_img_topics(topic.user) if profile_img_users(topic.user) %>
       <%= topic.user.name %>
 
       <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>

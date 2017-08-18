@@ -10,7 +10,7 @@
 
 
   <%= link_to users_path(@topic.user) do %>
-    <%= profile_img_thumb(@topic.user) if profile_img_thumb(@topic.user) %>
+    <%= profile_img_topics(@topic.user) if profile_img_topics(@topic.user) %>
   <%= @topic.user.name %>
   <% end %>
 

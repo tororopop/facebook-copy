@@ -1,0 +1,18 @@
+<div id="like-button<%= topic.id%>">
+  <% if topic.like_user(current_user.id) %>
+  <%# binding.pry%>
+  <%= button_to topic_like_path(likes, topic_id: topic.id), method: :delete, remote: true do %>
+    <%= image_tag("icon_red_heart.png") %>
+    <span>
+      <%= topic.likes_count %>
+    </span>
+  <% end %>
+<% else %>
+  <%= button_to topic_likes_path(topic), remote: true do %>
+    <%= image_tag("icon_heart.png") %>
+    <span>
+      <%= topic.likes_count %>
+    </span>
+  <% end %>
+<% end %>
+</div>

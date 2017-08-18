@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all
+    @likes = Like.where(topic_id: params[:topic_id])
   end
 
   def show

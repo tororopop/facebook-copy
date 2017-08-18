@@ -67,3 +67,7 @@ end
 
   gem 'rails_admin'
   gem 'cancan'
+
+  gem 'faker'
+
+  gem 'jquery-turbolinks'
