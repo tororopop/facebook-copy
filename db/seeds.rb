@@ -6,12 +6,14 @@ I18n.locale = :ja
   uid = Faker::Number.number(10)
   provider = Faker::Number.number(8)
   avatar = Faker::Avatar.image
+  image_url = Faker::Avatar.image
   password = "password"
   User.create!(email: email,
                name: name,
                uid: uid,
                provider: provider,
                avatar: avatar,
+               image_url: image_url,
                password: password,
                password_confirmation: password,
                )
@@ -35,3 +37,5 @@ end
     content: content,
   )
 end
+
+test
