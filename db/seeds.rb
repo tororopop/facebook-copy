@@ -37,5 +37,3 @@ end
     content: content,
   )
 end
-
-test

@@ -71,3 +71,5 @@ end
   gem 'faker'
 
   gem 'jquery-turbolinks'
+
+  gem 'fog'
