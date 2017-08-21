@@ -50,7 +50,6 @@ end
 
   group :development do
     gem 'letter_opener_web'
-    gem 'dotenv-rails'
   end
 
   gem 'rails_12factor', group: :production
@@ -73,3 +72,16 @@ end
   gem 'jquery-turbolinks'
 
   gem 'fog'
+
+  gem 'dotenv-rails'
+  gem 'unicorn'
+
+  gem 'therubyracer', platforms: :ruby
+
+  group :development, :test do
+    gem 'capistrano', '3.6.0'
+    gem 'capistrano-bundler'
+    gem 'capistrano-rails'
+    gem 'capistrano-rbenv'
+    gem 'capistrano3-unicorn'
+  end
