@@ -1,44 +1,5 @@
+<span>ホーム</span>
 
-    <%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
+<%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
 
-
-    <% @topics.each do |topic| %>
-    <div class="row" style="background-color:#fafafa;">
-
-      <% if current_user.id === topic.user_id %>
-      <div style="text-align: right;">
-        <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm' %>
-        <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
-      </div>
-      <% end %>
-
-        <%= link_to user_path(topic.user) do %>
-        <%= profile_img_topics(topic.user) if profile_img_topics(topic.user) %>
-        <%= topic.user.name %>
-        <% end %>
-
-        <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
-
-
-        <div style="font-size: 200%;"><%= topic.caption %></div>
-
-        <% if topic.file? %>
-        <%= image_tag(topic.file_url, :width => "400") %>
-        <% end %>
-
-        <div></div>
-
-        <span><%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %></span>
-
-        <span><%= link_to topic_path(topic) do %>
-          コメントする
-        <% end %></span>
-
-        <br>
-        <br>
-    </div>
-
-    <br>
-    <br>
-
-    <% end %>
+<%= render partial: 'each_do', locals: { topics: @topics, likes: @likes } %>

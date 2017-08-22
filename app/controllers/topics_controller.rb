@@ -9,6 +9,7 @@ class TopicsController < ApplicationController
   def show
     @comment = @topic.comments.build
     @comments = @topic.comments
+    @likes = Like.where(topic_id: params[:topic_id])
   end
 
   def new

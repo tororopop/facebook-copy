@@ -9,7 +9,7 @@
   <% end %>
 
 
-  <%= link_to users_path(@topic.user) do %>
+  <%= link_to user_path(@topic.user) do %>
     <%= profile_img_topics(@topic.user) if profile_img_topics(@topic.user) %>
   <%= @topic.user.name %>
   <% end %>
@@ -19,8 +19,13 @@
 
   <div style="font-size: 200%;"><%= @topic.caption %></div>
 
+  <% if @topic.file? %>
   <%= image_tag(@topic.file_url, :width => "400") %>
+  <% end %>
 
+  <div></div>
+
+  <span><%= render partial: 'likes/like', locals: { topic: @topic, likes: @likes } %></span>
 
     <p>コメント一覧</p>
     <div id="comments_area">

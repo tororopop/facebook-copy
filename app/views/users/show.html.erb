@@ -1,60 +1,69 @@
-<p>test(user/show画面です。)</p>
 
-<%= profile_img_users(@user) %>
+<%= profile_img_users(@user) %><%= @user.name %>
+
 <br>
-<%= @user.email %>
-
 <% if @user.id != current_user.id %>
 <%= render partial: 'follow_form', locals: { user: @user } %>
 <% end %>
+
 <br>
-  <%= render partial: 'users/followed_users', locals: { user: @user } %>
-<br>
-<br>
-  <%= render partial: 'users/followers', locals: { user: @user } %>
-  <br>
-  <br>
 
+  <div role="tabpanel">
 
-  <% @usertopics.reverse_each do |topic| %>
-  <div class="row" style="background-color:#fafafa;">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#contents1" aria-controls="contents1" role="tab" data-toggle="tab">タイムライン</a>
+      </li>
+      <li role="presentation">
+        <a href="#contents2" aria-controls="contents2" role="tab" data-toggle="tab">基本データ</a>
+      </li>
+      <li role="presentation">
+        <a href="#contents3" aria-controls="contents3" role="tab" data-toggle="tab">友達（フォロワー）</a>
+      </li>
+      <li role="presentation">
+        <a href="#contents4" aria-controls="contents3" role="tab" data-toggle="tab">写真</a>
+      </li>
+      <li role="presentation">
+        <a href="#contents5" aria-controls="contents3" role="tab" data-toggle="tab">その他 ▼</a>
+      </li>
+    </ul>
 
-    <!-- <% if @user.id === topic.user_id %> -->
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="contents1">
 
-        <% if current_user.id === topic.user_id %>
-        <div style="text-align: right;">
-          <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm' %>
-          <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
-        </div>
+        <br>
+        <% if current_user.id === @user.id %>
+        <%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
         <% end %>
 
-        <%= profile_img_topics(topic.user) if profile_img_users(topic.user) %>
-      <%= topic.user.name %>
+        <span><%= render partial: 'topics/each_do', locals: { topics: @topics, likes: @likes } %></span>
 
-      <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="contents2">
 
+        <p>概要</p>
+        <p>職歴と学歴</p>
+        <p>住んだことがある場所</p>
+        <p>連絡先と基本データ</p>
+        <p>家族と交際ステータス</p>
+        <p>詳細情報</p>
+        <p>ライフイベント</p>
 
-      <div style="font-size: 200%;"><%= topic.caption %></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="contents3">
 
-      <% if topic.file? %>
-      <%= image_tag(topic.file_url, :width => "400") %>
-      <% end %>
+        <%= render partial: 'users/followed_users', locals: { user: @user } %>
+        <br>
+        <%= render partial: 'users/followers', locals: { user: @user } %>
 
-      <div></div>
-
-      <span>いいね！</span>
-
-      <span><%= link_to topic_path(topic) do %>
-        コメントする
-      <% end %></span>
-
-      <br>
-      <br>
-
-      <!-- <% end %> -->
-
+      </div>
+      <div role="tabpanel" class="tab-pane" id="contents4">
+        <p>未実装</p>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="contents5">
+        <p>未実装</p>
+      </div>
+    </div>
   </div>
-
-  <br>
-
-  <% end %>

@@ -7,70 +7,110 @@
   <%= csrf_meta_tags %>
   <%= favicon_link_tag("favicon.png") %>
 </head>
-<body style="background-color:#EEEEEE;">
+<body>
 
-  <header style="border-bottom:#DCDCDC 1px solid;">
-    <% if user_signed_in? %>
-      <section id="menu-wrap" class="function container-fluid">
+  <header>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+      <% if user_signed_in? %>
+        <section id="menu-wrap" class="function container-fluid">
+          <div class="row">
+
+              <div class="col-xs-2">
+                <ul class="nav">
+                  <li><%= link_to user_path(current_user) do %>
+                    <%= profile_img_header(current_user) if profile_img_header(current_user) %>
+                    <%= current_user.name %>
+                    <% end %></li>
+                </ul>
+              </div>
+
+              <div class="col-xs-2">
+                  <ul class="nav">
+                    <li><a href="/">ホーム</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-xs-2">
+                <ul class="nav">
+                  <li><%= link_to 'マイページ', edit_user_registration_path(current_user) %></li>
+                </ul>
+              </div>
+
+              <div class="col-xs-2">
+                <ul class="nav">
+                  <li><%= link_to 'ユーザー一覧', users_path %></li>
+                </ul>
+              </div>
+
+              <div class="col-xs-2">
+                <ul class="nav">
+                  <li><%= link_to 'メッセージ', conversations_path %></li>
+                </ul>
+              </div>
+
+              <div class="col-xs-1">
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu left">
+                      <li><a href="#">ページを作成</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">グループの作成</a></li>
+                      <li><a href="#">参加しているグループ</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">広告を掲載</a></li>
+                      <li><a href="#">Facebook広告</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">アクティビティログ</a></li>
+                      <li><a href="#">ニュースフィードの設定</a></li>
+                      <li><a href="#">設定</a></li>
+                      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                    </ul><!-- /.dropdown-menu.right -->
+                  </li><!-- /.dropdown -->
+                </ul><!-- /.nav -->
+              </div>
+
+          </div>
+        </section>
+
+
+      <% else %>
+
+      <section id="menu-wrap" class="function container-fluid" style="font-size: 10px;">
         <div class="row">
-            <div class="col-xs-2">
-                  <%= link_to user_path(current_user) do %>
-                  <%= profile_img_header(current_user) if profile_img_header(current_user) %>
-                  <%= current_user.name %>
-                  <% end %>
+            <div class="col-xs-2 col-xs-offset-5" style="text-align: center; font-size: 15px;">
+          FACEBOOK-COPY
             </div>
 
-            <div class="col-xs-2">
-                    <a href="/">ホーム</a>
-            </div>
-            <div class="col-xs-2">
-              <%= link_to 'マイページ', edit_user_registration_path(current_user) %>
-            </div>
-            <div class="col-xs-2">
-              <%= link_to 'ユーザー一覧', users_path %>
-            </div>
-            <div class="col-xs-2">
-              <%= link_to 'メッセージ', conversations_path %>
-            </div>
-            <div class="col-xs-2">
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-            </div>
-        </div>
-      </section>
-
-
-    <% else %>
-
-    <section id="menu-wrap" class="function container-fluid" style="font-size: 10px;">
-      <div class="row">
-          <div class="col-xs-2 col-xs-offset-5" style="text-align: center; font-size: 15px;">
-        FACEBOOK-COPY
-          </div>
-
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-        <div class="col-xs-2">
-          <div class="field" style="text-align: right;">
-            <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
-          </div>
-        </div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
           <div class="col-xs-2">
-          <div class="field" style="text-align: right;">
-            <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード" %>
+            <div class="field" style="text-align: right;">
+              <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
+            </div>
           </div>
-        </div>
 
-          <div class="col-xs-1">
-          <div class="actions" style="text-align: right;">
-            <%= f.submit "ログイン" %>
+            <div class="col-xs-2">
+            <div class="field" style="text-align: right;">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード" %>
+            </div>
           </div>
-        </div>
 
-        <% end %>
+            <div class="col-xs-1">
+            <div class="actions" style="text-align: right;">
+              <%= f.submit "ログイン" %>
+            </div>
+          </div>
 
-      </section>
-    <% end %>
+          <% end %>
+
+        </section>
+      <% end %>
+    </nav>
   </header>
 
 

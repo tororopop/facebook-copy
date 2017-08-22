@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @usertopics = @user.topics
+    @topics = @user.topics
     @likes = Like.where(topic_id: params[:topic_id])
   end
 
