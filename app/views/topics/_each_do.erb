@@ -8,7 +8,7 @@
       <ul class="nav">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-chevron-down"></span>
+            <img src="<%= asset_path "chevron-down.png" %>" width="10%" >
           </a>
           <ul class="dropdown-menu left">
             <li><a href="#">投稿を保存</a></li>
@@ -44,14 +44,21 @@
 
     <div></div>
 
-    <span><%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %></span>
+    <%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %>
 
-    <span><%= link_to topic_path(topic) do %>
-      コメントする
-    <% end %></span>
+      <%= link_to topic_path(topic) do %>
+        コメントする
+      <% end %>
+    <br>
 
-    <br>
-    <br>
+    <% if topic.comments.last %>
+      <%= link_to topic_path(topic) do %>
+      <span style="color: black;">
+        ・<%= topic.comments.last.user.name %>さんがコメントしました。「<%= topic.comments.last.content %>」
+      </span>
+      <% end %>
+    <% end %>
+
 </div>
 
 <br>

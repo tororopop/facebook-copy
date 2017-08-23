@@ -1,3 +1,11 @@
+<p>
+  <%= link_to user_path(@conversation.recipient) do %>
+    <%= @conversation.recipient.name %>
+  <% end %>
+  とのメッセージ
+</p>
+
+
 <% if @over_ten %>
   <%= link_to '以前のメッセージ', '?m=all' %>
 <% end %>
@@ -29,5 +37,7 @@
   <div>
     <%= f.submit "メッセージを送る" %>
   </div>
+
+  <p><%= link_to 'メッセージ一覧に戻る', conversations_path %></p>
 
 <% end %>

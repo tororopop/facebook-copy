@@ -2,11 +2,30 @@
 <div class="row" style="background-color:#fafafa;">
 
   <% if current_user.id === @topic.user_id %>
-  <div style="text-align: right;">
-    <%= link_to "編集", edit_topic_path(@topic.id), class: 'btn btn-default btn-sm' %>
-    <%= link_to "削除", topic_path(@topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm' %>
-  </div>
+    <div style="text-align: right;">
+      <ul class="nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <img src="<%= asset_path "chevron-down.png" %>" width="10%" >
+          </a>
+          <ul class="dropdown-menu left">
+            <li><a href="#">投稿を保存</a></li>
+            <li class="divider"></li>
+            <li><%= link_to "投稿を編集", edit_topic_path(@topic.id) %></li>
+            <li><a href="#">日付を変更</a></li>
+            <li><a href="#">埋め込み</a></li>
+            <li><a href="#">この投稿に関するお知らせをオフにする</a></li>
+            <li><a href="#">タブで表示</a></li>
+            <li class="divider"></li>
+            <li><a href="#">タイムラインに表示しない</a></li>
+            <li><%= link_to "削除する", topic_path(@topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'} %></li>
+            <li><a href="#">翻訳をオフにする</a></li>
+          </ul><!-- /.dropdown-menu.right -->
+        </li><!-- /.dropdown -->
+      </ul><!-- /.nav -->
+    </div>
   <% end %>
+
 
 
   <%= link_to user_path(@topic.user) do %>

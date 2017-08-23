@@ -1,6 +1,8 @@
 ・フォロワーユーザー 一覧<br>
 <% @user.followers.each do |user| %>
-<%= profile_img_users(user) %>
-  <%= user.name %>
+  <%= link_to user_path(user) do %>
+    <%= profile_img_users(user) %>
+    <%= user.name %>
+  <% end %>
   <br>
 <% end %>
