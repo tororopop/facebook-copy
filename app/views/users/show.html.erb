@@ -1,83 +1,91 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-7 col-sm-offset-3 col-md-6 col-md-offset-3">
 
-<%= profile_img_users(@user) %><%= @user.name %>
+    <div class="row">
+      <%= profile_img_users(@user) %>
+      <%= @user.name %>
+      <br>
+      <% if @user.id != current_user.id %>
+        <div class="boxContainer" style="padding: 10px 0 10px 0;">
+        	<div class="box" style="margin-right: 10px;">
+            <%= render partial: 'follow_form', locals: { user: @user } %>
+          </div>
+          <div class="box btn btn-default">
+            <%= link_to '新しいメッセージ', conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-<br>
+    <div class="row">
+      <div role="tabpanel">
 
-<% if @user.id != current_user.id %>
-  <%= render partial: 'follow_form', locals: { user: @user } %>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#contents1" aria-controls="contents1" role="tab" data-toggle="tab">タイムライン</a>
+          </li>
+          <li role="presentation">
+            <a href="#contents2" aria-controls="contents2" role="tab" data-toggle="tab">基本データ</a>
+          </li>
+          <li role="presentation">
+            <a href="#contents3" aria-controls="contents3" role="tab" data-toggle="tab">友達（フォロワー）</a>
+          </li>
+          <li role="presentation">
+            <a href="#contents4" aria-controls="contents3" role="tab" data-toggle="tab">写真</a>
+          </li>
+        </ul>
 
-  <div class="item">
-    <%= link_to '新しいメッセージ', conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post'%>
-  </div>
-<% end %>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="contents1">
 
-
-<br>
-
-  <div role="tabpanel">
-
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active">
-        <a href="#contents1" aria-controls="contents1" role="tab" data-toggle="tab">タイムライン</a>
-      </li>
-      <li role="presentation">
-        <a href="#contents2" aria-controls="contents2" role="tab" data-toggle="tab">基本データ</a>
-      </li>
-      <li role="presentation">
-        <a href="#contents3" aria-controls="contents3" role="tab" data-toggle="tab">友達（フォロワー）</a>
-      </li>
-      <li role="presentation">
-        <a href="#contents4" aria-controls="contents3" role="tab" data-toggle="tab">写真</a>
-      </li>
-      <li role="presentation">
-        <a href="#contents5" aria-controls="contents3" role="tab" data-toggle="tab">その他 ▼</a>
-      </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="contents1">
-
-        <br>
-        <% if current_user.id === @user.id %>
-        <%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
-        <% end %>
-
-        <span><%= render partial: 'topics/each_do', locals: { topics: @topics, likes: @likes } %></span>
-
-      </div>
-      <div role="tabpanel" class="tab-pane" id="contents2">
-
-        <p>概要</p>
-        <p>職歴と学歴</p>
-        <p>住んだことがある場所</p>
-        <p>連絡先と基本データ</p>
-        <p>家族と交際ステータス</p>
-        <p>詳細情報</p>
-        <p>ライフイベント</p>
-
-      </div>
-      <div role="tabpanel" class="tab-pane" id="contents3">
-
-        <%= render partial: 'users/followed_users', locals: { user: @user } %>
-        <br>
-        <%= render partial: 'users/followers', locals: { user: @user } %>
-
-      </div>
-      <div role="tabpanel" class="tab-pane" id="contents4">
-
-        <% @topics.each do |topic| %>
-          <% if topic.file? %>
-            <%= link_to topic_path(topic) do %>
-              <%= image_tag(topic.file_url, :width => "400") %>
+            <% if current_user.id === @user.id %>
+              <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                <%= link_to new_topic_path, class: 'btn btn-default btn-block whatnow' do %>
+                  <%= profile_img_header(current_user) if profile_img_header(current_user) %>
+                  <span style="margin-left: 5px;">今なにしてる？</span>
+                <% end %>
+              </div>
             <% end %>
-          <% end %>
-        <% end %>
 
-      </div>
-      <div role="tabpanel" class="tab-pane" id="contents5">
-        <p>未実装</p>
+            <%= render partial: 'topics/each_do', locals: { topics: @topics, likes: @likes } %>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="contents2">
+
+            <p>概要</p>
+            <p>職歴と学歴</p>
+            <p>住んだことがある場所</p>
+            <p>連絡先と基本データ</p>
+            <p>家族と交際ステータス</p>
+            <p>詳細情報</p>
+            <p>ライフイベント</p>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="contents3">
+
+            <%= render partial: 'users/followed_users', locals: { user: @user } %>
+            <br>
+            <%= render partial: 'users/followers', locals: { user: @user } %>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="contents4">
+
+            <% @topics.each do |topic| %>
+              <% if topic.file? %>
+                <div style="padding:3px 3px 3px 3px;">
+                <%= link_to topic_path(topic) do %>
+                  <%= image_tag(topic.file_url, :width => "auto") %>
+                <% end %>
+              </div>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
+</div>

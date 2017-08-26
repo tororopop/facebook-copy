@@ -1,0 +1,160 @@
+html {
+  position: relative;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+html {
+  min-height: 104%;
+}
+
+footer {
+  width: 100%;
+  background-color: #fff;
+}
+
+footer ul{
+  margin: 0 auto;
+  list-style: none;
+}
+
+footer ul a {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+footer li {
+  float: right;
+  width: auto;
+}
+
+footer ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+footer ul a {
+  display: block;
+  padding: 10px 25px 10px 8px;
+}
+
+body {
+   background-color:#e9ebee;
+}
+
+
+
+
+.navbar-default {
+   background-color: #4267b2;
+}
+
+body {
+   padding-top: 50px;
+}
+
+table tr td{
+  padding: 10px 8px 10px 6px;
+}
+
+.fbtop{
+  font-size: 35px;
+  color: white;
+}
+
+
+.field {
+  padding-bottom: 10px;
+}
+
+
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 7px solid;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu {
+   background-color: white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: black;
+}
+
+
+/* navbar hover,focus時のテキストカラー */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: white;
+  background-color: #29487d;
+}
+
+
+
+.flash {
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+
+
+
+
+
+
+.child li {
+  padding-top: 13px;
+  border-bottom: 1px dotted #ccc;
+  list-style-type: none;
+}
+
+.right {
+text-align: right;
+}
+
+.left {
+text-align: left;
+}
+
+
+.dropdown-menu.left {
+ left:auto;
+ right:0;
+ &::before {left:auto !important; right:9px;}
+ &::after {left:auto !important; right:10px;}
+}
+
+
+.wrapper {
+  margin-bottom: 74px;
+  padding: 20px 20px 20px 35px;
+  .row {
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+}
+input[type="submit"].btn-block{
+  margin: 15px 0;
+}
+
+.container{
+  padding-bottom: 85px;
+}

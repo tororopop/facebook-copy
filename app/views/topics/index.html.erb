@@ -1,5 +1,39 @@
-<span>ホーム</span>
 
-<%= link_to "今なにしてる？", new_topic_path, class: 'btn btn-default' %>
+<div class="row">
+  <div class="hidden-xs col-sm-3">
 
-<%= render partial: 'each_do', locals: { topics: @topics, likes: @likes } %>
+    <ul class="sidebar nav nav-stacked affix">
+      <li>
+        <%= link_to user_path(current_user) do %>
+        <%= profile_img_header(current_user) if profile_img_header(current_user) %>
+        <%= current_user.name %>
+        <% end %>
+      </li>
+      <li><a>ニュースフィード</a></li>
+      <li><a>Messenger</a></li>
+      <li><a>ショートカット</a></li>
+      <li><a>イベント</a></li>
+      <li><a>Facebookページ</a></li>
+      <li><a>グループ</a></li>
+      <li><a>Poke</a></li>
+      <li><%= link_to '友達を検索', users_path %></li>
+      <li><a>保存済み</a></li>
+      <li><a>友達リスト</a></li>
+      <li><a>インサイト</a></li>
+      <li><a>ゲーム</a></li>
+      <li><a>ライブ動画</a></li>
+      <li><a>▼ もっと見る</a></li>
+
+    </ul>
+  </div>
+
+  <div class="col-xs-12 col-sm-7 col-md-6">
+    <div class="row" style="margin-bottom: 10px;">
+      <%= link_to new_topic_path, class: 'btn btn-default btn-block whatnow' do %>
+        <%= profile_img_header(current_user) if profile_img_header(current_user) %>
+        <span style="margin-left: 5px;">今なにしてる？</span>
+      <% end %>
+    </div>
+    <%= render partial: 'each_do', locals: { topics: @topics, likes: @likes } %>
+  </div>
+</div>

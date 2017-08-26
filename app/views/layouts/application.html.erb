@@ -5,128 +5,140 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= favicon_link_tag("favicon.png") %>
 </head>
 <body>
 
-  <header>
+<header>
+
+  <% if user_signed_in? %>
 
     <nav class="navbar navbar-default navbar-fixed-top">
+    	<div class="container-fluid">
+    		<div class="navbar-header">
 
-      <% if user_signed_in? %>
-        <section id="menu-wrap" class="function container-fluid">
-          <div class="row">
+    			<button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample8">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
 
-              <div class="col-xs-2">
-                <ul class="nav">
-                  <li><%= link_to user_path(current_user) do %>
-                    <%= profile_img_header(current_user) if profile_img_header(current_user) %>
-                    <%= current_user.name %>
-                    <% end %></li>
-                </ul>
-              </div>
+    			<a class="navbar-brand" href="/" style="padding-top: 8px; padding-bottom: 8px;">
+            <img src="<%= asset_path "FBfLogowhite1024.png" %>" style="height: 34px;">
+    			</a>
 
-              <div class="col-xs-2">
-                  <ul class="nav">
-                    <li><a href="/">ホーム</a></li>
+    			<a class="navbar-brand" style="width: 270px; padding-top: 8px; padding-bottom: 8px;">
+            <div class="input-group navbar-left" role="search">
+              <input type="text" class="form-control" placeholder="検索">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class='fa fa-search'></i>
+                </button>
+              </span>
+            </div>
+          </a>
+
+    		</div>
+
+    		<div class="collapse navbar-collapse navbar-right" id="navbarEexample8">
+    			<ul class="nav navbar-nav">
+    				<li>
+              <%= link_to user_path(current_user) do %>
+              <%= profile_img_header(current_user) if profile_img_header(current_user) %>
+              <%= current_user.name %>
+              <% end %>
+            </li>
+    				<li><a href="/">ホーム</a></li>
+    				<li><%= link_to '友達検索', users_path %></li>
+            <li>
+              <%= link_to edit_user_registration_path(current_user) do %>
+                <i class="fa fa-cog" aria-hidden="true"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to conversations_path do %>
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+              <% end %>
+            </li>
+            <li>
+
+              <ul class="nav">
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" style="color: #29487d; padding-top: 15px; padding-bottom: 15px;">
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu left">
+                    <li><a href="#">ページを作成</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">グループの作成</a></li>
+                    <li><a href="#">参加しているグループ</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">広告を掲載</a></li>
+                    <li><a href="#">Facebook広告</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">アクティビティログ</a></li>
+                    <li><a href="#">ニュースフィードの設定</a></li>
+                    <li><a href="#">設定</a></li>
+                    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
                   </ul>
-              </div>
-
-              <div class="col-xs-2">
-                <ul class="nav">
-                  <li><%= link_to 'マイページ', edit_user_registration_path(current_user) %></li>
-                </ul>
-              </div>
-
-              <div class="col-xs-2">
-                <ul class="nav">
-                  <li><%= link_to 'ユーザー一覧', users_path %></li>
-                </ul>
-              </div>
-
-              <div class="col-xs-2">
-                <ul class="nav">
-                  <li><%= link_to 'メッセージ', conversations_path %></li>
-                </ul>
-              </div>
-
-              <div class="col-xs-1">
-                <ul class="nav">
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu left">
-                      <li><a href="#">ページを作成</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">グループの作成</a></li>
-                      <li><a href="#">参加しているグループ</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">広告を掲載</a></li>
-                      <li><a href="#">Facebook広告</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">アクティビティログ</a></li>
-                      <li><a href="#">ニュースフィードの設定</a></li>
-                      <li><a href="#">設定</a></li>
-                      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-                    </ul><!-- /.dropdown-menu.right -->
-                  </li><!-- /.dropdown -->
-                </ul><!-- /.nav -->
-              </div>
-
-          </div>
-        </section>
+                </li>
+              </ul>
 
 
-      <% else %>
-
-      <section id="menu-wrap" class="function container-fluid" style="font-size: 10px;">
-        <div class="row">
-            <div class="col-xs-2 col-xs-offset-5" style="text-align: center; font-size: 15px;">
-          FACEBOOK-COPY
-            </div>
-
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-          <div class="col-xs-2">
-            <div class="field" style="text-align: right;">
-              <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
-            </div>
-          </div>
-
-            <div class="col-xs-2">
-            <div class="field" style="text-align: right;">
-              <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード" %>
-            </div>
-          </div>
-
-            <div class="col-xs-1">
-            <div class="actions" style="text-align: right;">
-              <%= f.submit "ログイン" %>
-            </div>
-          </div>
-
-          <% end %>
-
-        </section>
-      <% end %>
+            </li>
+    			</ul>
+    		</div>
+    	</div>
     </nav>
-  </header>
+
+
+  <% else %>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <section class="container-fluid">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1 col-sm-5 fbtop">
+            facebook-copy
+          </div>
+          <table class="col-xs-10 col-xs-offset-1 col-sm-4">
+            <tr>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <td class="field">
+                <%= f.email_field :email, class: "form-control", autofocus: true, placeholder: "メールアドレス" %>
+              </td>
+              <td class="field">
+                <%= f.password_field :password, class: "form-control", autocomplete: "off", placeholder: "パスワード" %>
+              </td>
+              <td class="actions">
+                <%= f.submit "ログイン", class: "btn btn-primary" %>
+              </td>
+              <% end %>
+            <tr>
+          </table>
+        </div>
+      </section>
+    </nav>
+  <% end %>
+</header>
 
 
   <div class="container">
-    <p class="flash" style="text-align: center;"><%= notice %><%= alert %></p>
+    <p class="flash"><%= notice %><%= alert %></p>
 
-    <div class="wrapper col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-
-<%= yield %>
+      <%= yield %>
 
     </div>
   </div>
-    <br>
-    <br>
+
   <footer>
     <ul>
+      <li><a>facebook-copy</a></li>
+      <li><a>利用規約</a></li>
+      <li><a>プライバシーポリシー</a></li>
+      <li><a>運営会社</a></li>
       <li><a>@ 2017 dive into code</a></li>
     </ul>
   </footer>

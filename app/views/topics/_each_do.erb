@@ -1,55 +1,74 @@
 
 <% @topics.each do |topic| %>
 
-<div class="row" style="background-color:#fafafa;">
+  <div class="row" style="background-color:#fafafa; border-radius: 0.3em; padding: 10px 10px 10px 10px; margin-bottom: 20px;">
 
-  <% if current_user.id === topic.user_id %>
-    <div style="text-align: right;">
-      <ul class="nav">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <img src="<%= asset_path "chevron-down.png" %>" width="10%" >
-          </a>
-          <ul class="dropdown-menu left">
-            <li><a href="#">投稿を保存</a></li>
-            <li class="divider"></li>
-            <li><%= link_to "投稿を編集", edit_topic_path(topic.id) %></li>
-            <li><a href="#">日付を変更</a></li>
-            <li><a href="#">埋め込み</a></li>
-            <li><a href="#">この投稿に関するお知らせをオフにする</a></li>
-            <li><a href="#">タブで表示</a></li>
-            <li class="divider"></li>
-            <li><a href="#">タイムラインに表示しない</a></li>
-            <li><%= link_to "削除する", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'} %></li>
-            <li><a href="#">翻訳をオフにする</a></li>
-          </ul><!-- /.dropdown-menu.right -->
-        </li><!-- /.dropdown -->
-      </ul><!-- /.nav -->
+    <div class="boxContainer" style="padding-bottom: 10px;">
+    	<div class="box" style="margin-right: 10px;">
+        <%= link_to user_path(topic.user) do %>
+          <%= profile_img_topics(topic.user) if profile_img_topics(topic.user) %>
+      </div>
+
+    	<div class="box">
+        <div>
+          <%= topic.user.name %>
+          <% end %>
+        </div>
+    	  <div>
+          <%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %>
+        </div>
+      </div>
+
+      <div class="box" style="position: absolute; right: 0;">
+        <% if current_user.id === topic.user_id %>
+          <div style="text-align: right;">
+            <ul class="nav">
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" style="width: 60px; padding: 5px 0 5px 0;">
+                  <img src="<%= asset_path "chevron-down.png" %>" style="width: 60px;" >
+                </a>
+                <ul class="dropdown-menu left">
+                  <li><a href="#">投稿を保存</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "投稿を編集", edit_topic_path(topic.id) %></li>
+                  <li><a href="#">日付を変更</a></li>
+                  <li><a href="#">埋め込み</a></li>
+                  <li><a href="#">この投稿に関するお知らせをオフにする</a></li>
+                  <li><a href="#">タブで表示</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">タイムラインに表示しない</a></li>
+                  <li><%= link_to "削除する", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'} %></li>
+                  <li><a href="#">翻訳をオフにする</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
 
-    <%= link_to user_path(topic.user) do %>
-    <%= profile_img_topics(topic.user) if profile_img_topics(topic.user) %>
-    <%= topic.user.name %>
-    <% end %>
-
-    <div style="border-bottom:#DCDCDC 1px solid;"><%= topic.updated_at.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[topic.updated_at.wday]}) %k:%M") %></div>
-
-
-    <div style="font-size: 200%;"><%= topic.caption %></div>
+    <div style="font-size: 14px; padding-bottom: 10px;">
+      <%= topic.caption %>
+    </div>
 
     <% if topic.file? %>
-    <%= image_tag(topic.file_url, :width => "400") %>
+      <div style="padding-bottom: 15px;">
+        <%= image_tag(topic.file_url, :width => "auto") %>
+      </div>
     <% end %>
 
-    <div></div>
 
-    <%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %>
+    <div class="boxContainer" style="border-top:#DCDCDC 1px solid;">
+    	<div class="box" style="margin: 10px 10px 10px 0;">
+        <%= render partial: 'likes/like', locals: { topic: topic, likes: @likes } %>
+      </div>
+      <div class="box" style="margin: 10px 10px 10px 0; line-height: 25px;">
+        <%= link_to topic_path(topic) do %>
+          コメントする
+        <% end %>
+      </div>
+    </div>
 
-      <%= link_to topic_path(topic) do %>
-        コメントする
-      <% end %>
-    <br>
 
     <% if topic.comments.last %>
       <%= link_to topic_path(topic) do %>
@@ -59,8 +78,6 @@
       <% end %>
     <% end %>
 
-</div>
-
-<br>
+  </div>
 
 <% end %>

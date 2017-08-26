@@ -1,28 +1,51 @@
-<h2>サインアップ</h2>
 
-<%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+<div class="row">
+  <div class="col-xs-9 col-xs-offset-1 col-sm-5">
+    <p style="color: #365899; font-size: 20px; font-weight: bold; padding-top: 70px;">
+      Facebookを使うと、友達や同僚、同級生、仲間たちとつながりを深められます。ケータイ、スマートフォンからもアクセスできます。
+    </p>
+    <img src="<%= asset_path "signup.png" %>">
   </div>
 
-  <!-- 名前入力用のフィールドを追加 -->
-  <div class="field">
-    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-  </div>
+  <div class="col-xs-9 col-xs-offset-1 col-sm-4 col-sm-offset-1">
+    <div class="row">
+      <h1><strong>アカウント登録</strong></h1>
 
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
-  </div>
+      <p>情報のプライバシーは設定で管理できるので安心です。</p>
 
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "パスワード（確認）" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+      <%= devise_error_messages! %>
 
-  <div class="actions">
-    <%= f.submit "サインアップ", class: "btn btn-primary btn-block" %>
-  </div>
-<% end %>
+      <div class="field">
+        <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
+      </div>
 
-<%= render "devise/shared/links" %>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+      </div>
+
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
+      </div>
+
+      <div class="field">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "パスワード（確認）" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-11 col-sm-7">
+        <p style="font-size: 9px;color: #777;">
+          [アカウントを作成]をクリックすることで、利用規約に同意し、Cookieポリシーに関する情報を含むデータに関するポリシーを読んだものとします。サービスに関連してFacebookからSMS通知が届くことがありますが、これはいつでもオプトアウトできます。
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="actions">
+        <%= f.submit "アカウントを作成", class: "btn btn-success btn-block btn-lg" %>
+      </div>
+      <% end %>
+
+    <%= render "devise/shared/links" %>
+
+  </div>
+</div>
