@@ -5,13 +5,20 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'topics#index', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root :to => 'users/registrations#new', as: :unauthenticated_root
+    end
+  end
 
   resources :topics do
     resources :comments
     resources :likes, only: [:create, :destroy]
   end
 
-  root 'topics#index'
 
   resources :users, only: [:index, :show]
 
