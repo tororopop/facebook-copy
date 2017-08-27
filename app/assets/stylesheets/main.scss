@@ -5,6 +5,7 @@ html {
 footer {
   position: absolute;
   bottom: 0;
+  width: 100%;
 }
 
 html {
@@ -148,7 +149,9 @@ text-align: left;
 
 .wrapper {
   margin-bottom: 74px;
-  padding: 20px 20px 20px 35px;
+  padding: 20px 20px 20px 20px;
+  background-color:#fafafa;
+  border-radius: 0.3em;
   .row {
     border-bottom: 1px solid #ccc;
     padding: 20px;

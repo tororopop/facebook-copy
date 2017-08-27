@@ -17,8 +17,7 @@
       <% end %>
     </div>
 
-    <div class="row">
-      <div role="tabpanel">
+    <div class="row" role="tabpanel">
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -41,7 +40,7 @@
           <div role="tabpanel" class="tab-pane active" id="contents1">
 
             <% if current_user.id === @user.id %>
-              <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+              <div style="margin-top: 10px; margin-bottom: 10px;">
                 <%= link_to new_topic_path, class: 'btn btn-default btn-block whatnow' do %>
                   <%= profile_img_header(current_user) if profile_img_header(current_user) %>
                   <span style="margin-left: 5px;">今なにしてる？</span>
@@ -49,7 +48,9 @@
               </div>
             <% end %>
 
-            <%= render partial: 'topics/each_do', locals: { topics: @topics, likes: @likes } %>
+            <div style="padding: 0 15px 0 15px;">
+              <%= render partial: 'topics/each_do', locals: { topics: @topics, likes: @likes } %>
+            </div>
 
           </div>
           <div role="tabpanel" class="tab-pane" id="contents2">
@@ -84,7 +85,6 @@
 
           </div>
         </div>
-      </div>
     </div>
 
   </div>
