@@ -7,7 +7,7 @@ module ApplicationHelper
     else
       img_url = 'no_image.png'
     end
-    image_tag(img_url, :size => "150x150", alt: user.name)
+    image_tag(img_url, :size => "auto", alt: user.name)
   end
 
   def profile_img_users(user)

@@ -55,6 +55,7 @@ body {
 
 body {
    padding-top: 50px;
+   margin-bottom: 30px;
 }
 
 table tr td{
@@ -64,6 +65,10 @@ table tr td{
 .fbtop{
   font-size: 35px;
   color: white;
+}
+.fbtop:hover{
+  color: white;
+  text-decoration: none;
 }
 
 
