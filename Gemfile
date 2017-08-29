@@ -85,3 +85,5 @@ end
     gem 'capistrano-rbenv'
     gem 'capistrano3-unicorn'
   end
+
+  gem 'kaminari'

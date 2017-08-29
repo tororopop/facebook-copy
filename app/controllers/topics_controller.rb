@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.all
+    @topics = Topic.all.page(params[:page]).per(20)
     @likes = Like.where(topic_id: params[:topic_id])
   end
 
