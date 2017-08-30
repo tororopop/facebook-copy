@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.jscroll.min
+//= require test-jscroll
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
