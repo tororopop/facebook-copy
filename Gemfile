@@ -46,44 +46,44 @@ group :development, :test do
   gem 'better_errors'
 end
 
-  gem 'devise'
+gem 'devise'
 
-  group :development do
-    gem 'letter_opener_web'
-  end
+group :development do
+  gem 'letter_opener_web'
+end
 
-  gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: :production
 
-  gem 'omniauth'
-  gem 'omniauth-twitter'
-  gem 'omniauth-facebook'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
-  #image uploader
-  gem 'carrierwave'
-  gem 'mini_magick'
+#image uploader
+gem 'carrierwave'
+gem 'mini_magick'
 
-  gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails'
 
-  gem 'rails_admin'
-  gem 'cancan'
+gem 'rails_admin'
+gem 'cancan'
 
-  gem 'faker'
+gem 'faker'
 
-  gem 'jquery-turbolinks'
+gem 'jquery-turbolinks'
 
-  gem 'fog'
+gem 'fog'
 
-  gem 'dotenv-rails'
-  gem 'unicorn'
+gem 'dotenv-rails'
+gem 'unicorn'
 
-  gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
-  group :development, :test do
-    gem 'capistrano', '3.6.0'
-    gem 'capistrano-bundler'
-    gem 'capistrano-rails'
-    gem 'capistrano-rbenv'
-    gem 'capistrano3-unicorn'
-  end
+group :development, :test do
+  gem 'capistrano', '3.6.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+end
 
-  gem 'kaminari'
+gem 'kaminari'
