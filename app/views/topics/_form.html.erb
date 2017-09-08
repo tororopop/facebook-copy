@@ -21,6 +21,7 @@
   <%= f.label :写真 %>
   <%= f.file_field :file, class: 'form-control' %>
   <%= f.hidden_field :file_cache %>
+  <div class="preview"></div>
   <br>
   <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
 <% end %>
