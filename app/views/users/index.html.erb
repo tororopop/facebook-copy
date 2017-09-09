@@ -1,7 +1,6 @@
-<div class="row testjsc" style="margin-bottom: 100px;">
+<div class="row" style="margin-bottom: 100px;">
   <h2>知り合いかも(ユーザー一覧)</h2>
 
-  <div class="jscroll-added">
     <% @users.each do |user| %>
         <div class="container-child col-md-2 col-sm-4 col-xs-6 " style="margin-top: 10px; border-right:#DCDCDC 1px solid;">
           <%= link_to user_path(user) do %>
@@ -21,8 +20,9 @@
           <% end %>
         </div>
     <% end %>
-    <%= link_to_next_page @users, 'もっと見る', id: 'more_link' %>
-  </div>
 
+    <div style="text-align: center;">
+      <%= paginate @users %>
+    </div>
 
 </div>
