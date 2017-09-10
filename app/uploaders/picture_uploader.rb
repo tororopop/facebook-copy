@@ -4,6 +4,17 @@ class PictureUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
+  process :fix_rotate
+
+  # アップロードした写真が回転してしまう問題に対応
+  def fix_rotate
+      manipulate! do |img|
+          img = img.auto_orient
+          img = yield(img) if block_given?
+          img
+      end
+  end
+
   # Choose what kind of storage to use for this uploader:
   # storage :file
   storage :fog
@@ -14,9 +25,6 @@ class PictureUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process :fix_exif_rotation
-
-  snip...
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
